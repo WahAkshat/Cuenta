@@ -1,4 +1,4 @@
-package com.example.cuenta;
+package com.example.cuentaIt;
 
 import org.junit.Test;
 
