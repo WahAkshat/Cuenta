@@ -20,6 +20,8 @@
         <activity android:name=".CreateOrg"></activity>
         <activity android:name=".OrgHome" />
         <activity android:name=".UserHome" />
+        <activity android:name=".qr_scanner" />
+        <activity android:name=".qr_generator" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>

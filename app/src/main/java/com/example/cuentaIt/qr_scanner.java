@@ -34,5 +34,6 @@ public class qr_scanner extends AppCompatActivity {
              }
          });
 
+
     }
 }
