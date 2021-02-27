@@ -1,8 +1,5 @@
 package com.example.cuentaIt;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
     private EditText email;
     private EditText password;
 
-    private SharedPreferences sp;
+    public SharedPreferences sp;
 
 
 
@@ -85,6 +85,9 @@ public class Login extends AppCompatActivity {
                         i.putExtra("email", email_val);
                         i.putExtra("password", pass_val);
                         i.putExtra("type",type);
+
+                        getSp().edit().putBoolean("logged",true).apply();
+                        getSp().edit().putString("type", type).apply();
                         startActivity(i);
                     }
                     else{
@@ -118,8 +121,8 @@ public class Login extends AppCompatActivity {
 
                 if(mUser!=null)
                     Toast.makeText(Login.this,"Hello user",Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(Login.this,"Not signed in!",Toast.LENGTH_LONG).show();
+//                else
+//                    Toast.makeText(Login.this,"Not signed in!",Toast.LENGTH_LONG).show();
 
             }
         };
