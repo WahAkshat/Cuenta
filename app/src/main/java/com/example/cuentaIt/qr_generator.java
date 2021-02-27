@@ -2,6 +2,7 @@ package com.example.cuentaIt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +43,12 @@ public class qr_generator extends AppCompatActivity {
                     }
 
                 }    }
+        });
+        scanbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),qr_generator.class));
+            }
         });
     }
 }
