@@ -47,7 +47,10 @@ public class CreateOrg extends AppCompatActivity {
                                         if(task.isSuccessful()) {
                                             Toast.makeText(CreateOrg.this, "Created", Toast.LENGTH_LONG).show();
                                             startActivity(new Intent(CreateOrg.this, OrgHome.class));
+                                            finish();
                                         }
+                                        else
+                                            Toast.makeText(CreateOrg.this, "Not Created", Toast.LENGTH_LONG).show();
 
                                     }
                                 });
@@ -63,6 +66,7 @@ public class CreateOrg extends AppCompatActivity {
                                     if(task.isSuccessful()) {
                                         Toast.makeText(CreateOrg.this, "Created", Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(CreateOrg.this, OrgHome.class));
+                                        finish();
                                     }
 
                                 }

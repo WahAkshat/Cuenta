@@ -36,6 +36,7 @@ public class OrgHome extends AppCompatActivity {
 
             mAuth.signOut();
             startActivity(new Intent(OrgHome.this, MainActivity.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

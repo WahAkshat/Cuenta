@@ -29,6 +29,7 @@ public class UserHome extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                 startActivity(new Intent(UserHome.this,qr_scanner.class));
+                finish();
                 }
                 catch(Exception e){
                     System.out.println(e);
@@ -53,6 +54,7 @@ public class UserHome extends AppCompatActivity {
 
             mAuth.signOut();
             startActivity(new Intent(UserHome.this, MainActivity.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

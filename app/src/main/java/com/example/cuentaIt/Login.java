@@ -37,12 +37,18 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         preferences = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
         if (preferences.getString("logged", "").toString().equals("true")) {
-            if(preferences.getString("type","").equalsIgnoreCase("user"))
+            if(preferences.getString("type","").equalsIgnoreCase("user")) {
                 startActivity(new Intent(Login.this, UserHome.class));
-            else
+                finish();
+            }
+            else {
                 startActivity(new Intent(Login.this, OrgHome.class));
+                finish();
+            }
         }
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -85,6 +91,7 @@ public class Login extends AppCompatActivity {
                         preferences.edit().putString("logged","true").apply();
                         preferences.edit().putString("type", type).apply();
                         startActivity(i);
+                        finish();
                     }
                     else{
                         mAuth.createUserWithEmailAndPassword(email_val,pass_val).addOnCompleteListener(Login.this,
@@ -96,6 +103,7 @@ public class Login extends AppCompatActivity {
                                             preferences.edit().putString("logged","true").apply();
                                             preferences.edit().putString("type", type).apply();
                                             startActivity(new Intent(Login.this, UserHome.class));
+                                            finish();
                                         }
 
                                     }
@@ -150,6 +158,7 @@ public class Login extends AppCompatActivity {
                         startActivity(new Intent(Login.this, UserHome.class));
                     else
                         startActivity(new Intent(Login.this, OrgHome.class));
+                    finish();
                 }
                 else{
                     Toast.makeText(Login.this,"Still not in",Toast.LENGTH_LONG).show();

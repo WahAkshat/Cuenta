@@ -1,6 +1,7 @@
 package com.example.cuentaIt;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import static com.example.cuentaIt.Login.PREFS_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +29,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+        if (preferences.getString("logged", "").toString().equals("true")) {
+            if(preferences.getString("type","").equalsIgnoreCase("user")) {
+                startActivity(new Intent(MainActivity.this, UserHome.class));
+                finish();
+            }
+            else {
+                startActivity(new Intent(MainActivity.this, OrgHome.class));
+                finish();
+            }
+        }
 
 //        sp = l.getSp();
 //        if(l.getSp().getBoolean("logged",false)){
@@ -53,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"User Login",Toast.LENGTH_LONG).show();
 
                 startActivity(i);
+                finish();
 
             }
         });
@@ -64,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Org Login",Toast.LENGTH_LONG).show();
 
                 startActivity(i);
+                finish();
 
             }
         });
