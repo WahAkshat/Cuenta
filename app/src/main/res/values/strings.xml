@@ -3,4 +3,6 @@
     <string name="welcome_to_cuenta">Welcome to Cuenta!</string>
     <string name="user_login">User Login</string>
     <string name="org_login">Org Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
