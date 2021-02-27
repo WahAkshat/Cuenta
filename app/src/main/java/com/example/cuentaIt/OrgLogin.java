@@ -14,7 +14,7 @@ public class OrgLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_login);
-        Button toqr=findViewById(R.id.toqr);
+        Button toqr=findViewById(R.id.toqru);
         toqr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
