@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,19 +29,17 @@ public class Login extends AppCompatActivity {
     private Button create;
     private EditText email;
     private EditText password;
-
-    public SharedPreferences sp;
-
+    private SharedPreferences preferences;
+    public static final String PREFS_NAME = "LoginPrefs";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setSp(getSharedPreferences("login",MODE_PRIVATE));
-        setSp(getSharedPreferences("type",MODE_PRIVATE));
 
-        if(getSp().getBoolean("logged",false)){
-            if(getSp().getString("type","").equalsIgnoreCase("user"))
-            startActivity(new Intent(Login.this, UserHome.class));
+        preferences = getSharedPreferences(PREFS_NAME, 0);
+        if (preferences.getString("logged", "").toString().equals("true")) {
+            if(preferences.getString("type","").equalsIgnoreCase("user"))
+                startActivity(new Intent(Login.this, UserHome.class));
             else
                 startActivity(new Intent(Login.this, OrgHome.class));
         }
@@ -86,8 +82,8 @@ public class Login extends AppCompatActivity {
                         i.putExtra("password", pass_val);
                         i.putExtra("type",type);
 
-                        getSp().edit().putBoolean("logged",true).apply();
-                        getSp().edit().putString("type", type).apply();
+                        preferences.edit().putString("logged","true").apply();
+                        preferences.edit().putString("type", type).apply();
                         startActivity(i);
                     }
                     else{
@@ -97,14 +93,13 @@ public class Login extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if(task.isSuccessful()) {
                                             Toast.makeText(Login.this, "Created", Toast.LENGTH_LONG).show();
-                                            getSp().edit().putBoolean("logged",true).apply();
-                                            getSp().edit().putString("type", type).apply();
+                                            preferences.edit().putString("logged","true").apply();
+                                            preferences.edit().putString("type", type).apply();
                                             startActivity(new Intent(Login.this, UserHome.class));
                                         }
 
                                     }
                                 });
-
                     }
 
                 }
@@ -149,14 +144,12 @@ public class Login extends AppCompatActivity {
 
                 if(task.isSuccessful()){
                     Toast.makeText(Login.this,"We in",Toast.LENGTH_LONG).show();
-                    getSp().edit().putBoolean("logged",true).apply();
-                    getSp().edit().putString("type", type).apply();
+                    preferences.edit().putString("logged","true").apply();
+                    preferences.edit().putString("type", type).apply();
                     if(type.equalsIgnoreCase("user"))
                         startActivity(new Intent(Login.this, UserHome.class));
                     else
                         startActivity(new Intent(Login.this, OrgHome.class));
-
-
                 }
                 else{
                     Toast.makeText(Login.this,"Still not in",Toast.LENGTH_LONG).show();
@@ -164,21 +157,6 @@ public class Login extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if(item.getItemId() == R.id.action_sign_out){
-            mAuth.signOut();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -193,13 +171,5 @@ public class Login extends AppCompatActivity {
         if(mAuthListener!=null){
             mAuth.removeAuthStateListener(mAuthListener);
         }
-    }
-
-    public SharedPreferences getSp() {
-        return sp;
-    }
-
-    public void setSp(SharedPreferences sp) {
-        this.sp = sp;
     }
 }
