@@ -3,4 +3,7 @@
     <string name="welcome_to_cuenta">Welcome to Cuenta!</string>
     <string name="user_login">User Login</string>
     <string name="org_login">Org Login</string>
+    <string name="Value">Enter The Value</string>
+    <string name="generate">GENERATE QR</string>
+    <string name="scan">SCAN QR</string>
 </resources>
